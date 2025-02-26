@@ -23,17 +23,22 @@ function AllTasks() {
   };
 
   const handleDrop = (targetStatus) => {
-    if (!draggedTask) {
-      console.warn("No task is being dragged!");
-      return;
-    }
+    if(!draggedTask) {
+      console.log("No task is being dragged!");
+      return;}
 
-    console.log("Dropped task:", draggedTask);
-    console.log("New status:", targetStatus);
+      console.log("Dropped task:", draggedTask);
+      console.log("New status:", targetStatus);
 
-    const updatedTask = { ...draggedTask, TaskStatus: targetStatus };
-    updateTask(updatedTask);
-    setDraggedTask(null);
+      const allTasks = [...tasks];
+      const updatedTask = { ...draggedTask, TaskStatus: targetStatus };
+
+      const element=allTasks.splice(draggedTask, 1);
+      allTasks.splice(draggedTask.index,0,element);
+      updateTask(updatedTask);
+      setDraggedTask(null);
+
+  
   };
 
   const ToDoTasks = tasks.filter((task) => task.TaskStatus === "To Do");
@@ -70,6 +75,7 @@ function AllTasks() {
         <h2 className="text-xl font-semibold text-sky-800 text-center">In Progress</h2>
         {InProgressTasks.map((task, index) => (
           <TaskCard
+          className="gap-5"
             draggable
             onDragStart={() => handleDragStart(task)}
             key={index}

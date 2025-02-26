@@ -4,7 +4,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const TaskCard = ({ task, onEdit, onDelete, draggable, onDragStart }) => {
   return (
-    <Card
+    <Card className="m-5"
       onDragStart={onDragStart} 
       draggable={draggable}
       title={task.TaskName}

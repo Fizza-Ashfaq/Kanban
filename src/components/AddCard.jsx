@@ -8,9 +8,11 @@ const { Option } = Select;
 const AddCard = () => {
   const { addNewTask } = useContext(TaskDataContext);
   const navigate = useNavigate();
+  const index=0;
 
   const onFinish = (values) => {
     const newTaskData = {
+      Index: index+1,
       TaskName: values.TaskName,
       TaskDescription: values.TaskDescription,
       TaskStatus: values.TaskStatus,
