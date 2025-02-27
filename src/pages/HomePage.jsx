@@ -14,14 +14,15 @@ const HomePage = () => {
       
       <h1 className="text-3xl font-bold text-blue-700 mt-4">Kanban</h1>
       
-      <div className="flex justify-center mt-6 text-sky-700 border-solid">
+      
         <Button 
+        className="flex justify-center mt-6 text-sky-700 border-solid"
           onClick={() => navigate("/AddPage")} 
           type="danger" 
         >
           Add Task +
         </Button>
-      </div>
+      
 
       <div className="mt-6 w-full flex justify-center">
         <AllTasks />
