@@ -9,10 +9,11 @@ function AllTasks() {
   const [draggedTask, setDraggedTask] = useState(null);
 
   useEffect(() => {
-    (async () => {
+    const onrender=(async () => {
       const tasks = await getAllTasks();
       setTasks(tasks);
-    })();
+    });
+    onrender();
   }, []);
 
   const ToDoTasks = tasks.filter((task) => task.TaskStatus === "To Do");
@@ -37,7 +38,9 @@ function AllTasks() {
     console.log("Dragging task:", task);
   };
 
+
   const handleDrop = async(event, targetStatus) => {
+    
     event.preventDefault();
     if (!draggedTask) {
       console.log("No task is being dragged!");
@@ -61,9 +64,10 @@ function AllTasks() {
     allTasks.splice(dropIndex, 0, draggedTask);
 
     await updateTask(updatedTask._id,updatedTask);
+    setTasks((prevTasks)=>
+      prevTasks.map((task)=>task._id===updatedTask._id ? updatedTask:task));
     setDraggedTask(null);
 
-    
   };
 
   return (

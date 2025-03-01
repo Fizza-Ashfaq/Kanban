@@ -13,6 +13,10 @@ const Navbar = () => {
     {
       key: "/AddPage",
       label: <Link to="/AddPage">Add Task</Link>,
+    },
+    {
+      key: "/SignUpPage",
+      label: <Link to="/SignUpPage">SignUp/Login</Link>,
     }
   ];
 
