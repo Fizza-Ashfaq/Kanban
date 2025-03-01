@@ -1,24 +1,27 @@
 import React, { useContext } from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select,DatePicker  } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { TaskDataContext } from './TaskDataProvider';
-
+import {addTask} from '../hooks/taskHook';
+import dayjs from 'dayjs';
 const { Option } = Select;
 
 const AddCard = () => {
-  const { addNewTask } = useContext(TaskDataContext);
   const navigate = useNavigate();
 
-
-  const onFinish = (values) => {
+  const onFinish = async(values) => {
     const newTaskData = {
-      Index: values.index,
       TaskName: values.TaskName,
       TaskDescription: values.TaskDescription,
       TaskStatus: values.TaskStatus,
       TaskPriority: values.TaskPriority,
+      DueDate:values.DueDate ? dayjs(values.DueDate).format('YYYY-MM-DD') : null, 
     };
-    addNewTask(newTaskData);
+    const data=await addTask(newTaskData);
+    if(data.length==0)
+    {
+      toast.error("Failed to add Task");
+    }
+    
     navigate('/HomePage');
   };
 
@@ -48,6 +51,10 @@ const AddCard = () => {
               <Option value="Medium">Medium</Option>
               <Option value="High">High</Option>
             </Select>
+          </Form.Item>
+
+          <Form.Item label="Due Date" name="DueDate" rules={[{ required: true, message: 'Please select a Due Date!' }]}>
+            <DatePicker className="w-full" format="YYYY-MM-DD" />
           </Form.Item>
           
           <Form.Item>

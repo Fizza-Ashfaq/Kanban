@@ -1,29 +1,48 @@
-import React, { useContext } from 'react';
-import { Form, Input, Button, Select } from 'antd';
+import React, { useContext, useState,useEffect } from 'react';
+import { Form, Input, Button, Select,DatePicker } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { TaskDataContext } from './TaskDataProvider';
-
+import toast,{Toaster} from 'react-hot-toast';
+import {updateTask} from '../hooks/taskHook';
+import dayjs from 'dayjs';
 const { Option } = Select;
 
-const AddCard = () => {
-  const { addNewTask } = useContext(TaskDataContext);
+const EditCard = ({task}) => {
   const navigate = useNavigate();
+  const [form]=Form.useForm();
 
-  const onFinish = (values) => {
+  useEffect(() => {
+    form.setFieldsValue(
+      {
+        TaskName:task.TaskName,
+        TaskDescription: task.TaskDescription,
+        TaskStatus: task.TaskStatus,
+        TaskPriority: task.TaskPriority,
+        DueDate: task.DueDate? dayjs(task.DueDate) : null,
+      }
+    );
+  }, [task,form]);
+   
+  const onFinish = async(values) => {
     const newTaskData = {
+      _id: task._id,
       TaskName: values.TaskName,
       TaskDescription: values.TaskDescription,
       TaskStatus: values.TaskStatus,
       TaskPriority: values.TaskPriority,
+      DueDate:values.DueDate ? dayjs(values.DueDate).format('YYYY-MM-DD') : null, 
     };
-    addNewTask(newTaskData);
+    const data = await updateTask(newTaskData._id,newTaskData);
+    if (data.length == 0) {
+      toast.error("Failed to add task");
+    }
+    toast.success("Task updated successfully!");
     navigate('/HomePage');
   };
 
   return (
     <div className='flex W-full justify-center'>
       <div className='flex flex-wrap pl-8 p-8 shadow-lg shadow-cyan-500/50 rounded-md border-solid border-2 w-[800px]'>
-        <Form className='w-full p-8' name="AddTask" layout="vertical" onFinish={onFinish}>
+        <Form  form={form} className='w-full p-8' name="AddTask" layout="vertical" onFinish={onFinish}>
           <Form.Item label="Task Name" name="TaskName" rules={[{ required: true, message: 'Please input the Task Name!' }]}>
             <Input className="w-full" placeholder="Enter Task Name" />
           </Form.Item>
@@ -47,6 +66,10 @@ const AddCard = () => {
               <Option value="High">High</Option>
             </Select>
           </Form.Item>
+
+          <Form.Item label="Due Date" name="DueDate" rules={[{ required: true, message: 'Please select a Due Date!' }]}>
+            <DatePicker className="w-full" format="YYYY-MM-DD" />
+          </Form.Item>
           
           <Form.Item>
             <Button type="primary" htmlType="submit">
@@ -59,4 +82,4 @@ const AddCard = () => {
   );
 };
 
-export default AddCard;
+export default EditCard;
