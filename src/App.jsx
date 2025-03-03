@@ -8,7 +8,7 @@ import SignUpPage from './pages/SignUpPage';
 import './index.css';
 import LoginPage from './pages/LoginPage';
 import LoggerPage from './pages/LoggerPage';
-
+import { Toaster } from 'react-hot-toast';
 function App() {
 
   return (
@@ -22,6 +22,7 @@ function App() {
           <Route path='/EditPage' element={<EditPage />} />
           <Route path='/SignUpPage' element={<SignUpPage />} />
         </Routes>
+        <Toaster position="top-center" reverseOrder={false}/>   
     </>
   )
 }

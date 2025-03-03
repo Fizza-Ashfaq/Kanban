@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Button } from "antd";
 import { loginUser } from "../hooks/userHook";
 import { useNavigate } from "react-router-dom";
-import toast,{Toaster} from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const LoginCard = () => {
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ const LoginCard = () => {
   
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex w-full justify-center">
         <div className="flex flex-wrap pl-8 p-8 shadow-lg shadow-cyan-500/50 rounded-md border-solid border-2 w-[800px]">
           <Form

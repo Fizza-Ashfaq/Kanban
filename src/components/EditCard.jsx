@@ -1,7 +1,7 @@
 import React, { useContext, useState,useEffect } from 'react';
 import { Form, Input, Button, Select,DatePicker } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import toast,{Toaster} from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import {updateTask} from '../hooks/taskHook';
 import dayjs from 'dayjs';
 const { Option } = Select;
@@ -43,8 +43,7 @@ const EditCard = ({task}) => {
 
   return (
     
-    <>
-        <Toaster position="top-center" reverseOrder={false}/>    
+    <> 
     <div className='flex W-full justify-center'>
       <div className='flex flex-wrap pl-8 p-8 shadow-lg shadow-cyan-500/50 rounded-md border-solid border-2 w-[800px]'>
         <Form  form={form} className='w-full p-8' name="AddTask" layout="vertical" onFinish={onFinish}>
