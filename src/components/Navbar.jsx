@@ -15,8 +15,12 @@ const Navbar = () => {
       label: <Link to="/AddPage">Add Task</Link>,
     },
     {
-      key: "/SignUpPage",
-      label: <Link to="/SignUpPage">SignUp/Login</Link>,
+      key: "/LoggerPage",
+      label: <Link to="/LoggerPage">History</Link>,
+    },
+    {
+      key: "/LoginPage",
+      label: <Link to="/LoginPage">SignUp/Login</Link>,
     }
   ];
 

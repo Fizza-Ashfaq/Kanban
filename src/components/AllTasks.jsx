@@ -9,10 +9,10 @@ function AllTasks() {
   const [draggedTask, setDraggedTask] = useState(null);
 
   useEffect(() => {
-    const onrender=(async () => {
+    const onrender=async () => {
       const tasks = await getAllTasks();
       setTasks(tasks);
-    });
+    }
     onrender();
   }, []);
 

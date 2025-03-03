@@ -6,20 +6,22 @@ import AddPage from './pages/AddPage';
 import EditPage from './pages/EditPage';
 import SignUpPage from './pages/SignUpPage';
 import './index.css';
+import LoginPage from './pages/LoginPage';
+import LoggerPage from './pages/LoggerPage';
 
 function App() {
 
   return (
     <>
-      <TaskDataProvider>
         <Routes>
-          <Route path='/' element={<SignUpPage />} />
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/LoggerPage' element={<LoggerPage />} />
+          <Route path='/LoginPage' element={<LoginPage />} />
           <Route path='/HomePage' element={<HomePage />} />
           <Route path='/AddPage' element={<AddPage />} />
           <Route path='/EditPage' element={<EditPage />} />
           <Route path='/SignUpPage' element={<SignUpPage />} />
         </Routes>
-      </TaskDataProvider>
     </>
   )
 }

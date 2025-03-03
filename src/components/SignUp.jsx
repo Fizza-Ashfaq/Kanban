@@ -7,19 +7,23 @@ import toast,{Toaster} from 'react-hot-toast';
 
 const SignUp = () => {
     const Navigate = useNavigate();
-    const onFinish=(data) => {
-        const res=signUpUser(data);
+    const onFinish=async(data) => {
+        const res=await signUpUser(data);
         if(res.length<0)
         {
             toast.error("Error signing up");
             return;
         }
-        // toast.success("Signup successful");
+        toast.success("Signup successful");
         Navigate('/HomePage')
     };
   
 
   return (
+    <>
+    <Toaster position="top-center" reverseOrder={false}/>    
+    
+
     <div className='flex w-full justify-center'>
       <div className='flex flex-wrap pl-8 p-8 shadow-lg shadow-cyan-500/50 rounded-md border-solid border-2 w-[800px]'>
         <Form className='w-full p-8' name="SignupForm" layout="vertical" onFinish={onFinish}>
@@ -47,9 +51,22 @@ const SignUp = () => {
               Sign Up
             </Button>
           </Form.Item>
+
+          <div className="text-center mt-4">
+              <p className="text-gray-600">
+                Already have an account?{" "}
+                <span
+                  className="text-blue-500 cursor-pointer hover:underline"
+                  onClick={() => navigate("/LoginPage")}
+                >
+                  Login here
+                </span>
+              </p>
+            </div>
         </Form>
       </div>
     </div>
+    </>
   );
 };
 
