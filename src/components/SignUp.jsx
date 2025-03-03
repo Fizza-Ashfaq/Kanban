@@ -15,7 +15,9 @@ const SignUp = () => {
             return;
         }
         toast.success("Signup successful");
-        Navigate('/HomePage')
+        setTimeout(() => {
+            Navigate("/HomePage");
+          }, 1000);
     };
   
 

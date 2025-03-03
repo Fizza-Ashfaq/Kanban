@@ -36,7 +36,9 @@ const EditCard = ({task}) => {
       toast.error("Failed to add task");
     }
     toast.success("Task updated successfully!");
-    navigate('/HomePage');
+    setTimeout(() => {
+      navigate("/HomePage");
+    }, 1000);
   };
 
   return (

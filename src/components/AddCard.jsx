@@ -23,7 +23,9 @@ const AddCard = () => {
       toast.error("Failed to add Task");
     }
     
-    navigate('/HomePage');
+    setTimeout(() => {
+      navigate("/HomePage");
+    }, 1000);
   };
 
   return (
