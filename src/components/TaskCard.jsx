@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Card, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { updateTask, deleteTask, getAllTasks } from "../hooks/taskHook";
 
 const TaskCard = ({ task, onEdit, onDelete, draggable, onDragStart }) => {
   return (

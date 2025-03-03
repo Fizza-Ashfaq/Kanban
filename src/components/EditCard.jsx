@@ -40,6 +40,9 @@ const EditCard = ({task}) => {
   };
 
   return (
+    
+    <>
+        <Toaster position="top-center" reverseOrder={false}/>    
     <div className='flex W-full justify-center'>
       <div className='flex flex-wrap pl-8 p-8 shadow-lg shadow-cyan-500/50 rounded-md border-solid border-2 w-[800px]'>
         <Form  form={form} className='w-full p-8' name="AddTask" layout="vertical" onFinish={onFinish}>
@@ -79,6 +82,7 @@ const EditCard = ({task}) => {
         </Form>
       </div>
     </div>
+    </>
   );
 };
 

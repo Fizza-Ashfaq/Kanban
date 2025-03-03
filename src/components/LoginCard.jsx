@@ -14,7 +14,7 @@ const LoginCard = () => {
         toast.error("Error signing up");
         return;
     }
-    toast.success("Signup successful");
+    toast.success("Login successful");
     setTimeout(() => {
         navigate("/HomePage");
       }, 1000);
