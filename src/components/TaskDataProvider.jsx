@@ -1,52 +1,63 @@
 import React, { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { addTask,updateTask, deleteTask, getAllTasks } from "../hooks/taskHook";
+import toast from 'react-hot-toast';
 export const TaskDataContext = React.createContext();
 
 const TaskDataProvider = ({ children }) => {
 
-    const getAllTask=() => {
-        try {
-            const allTasks = localStorage.getItem('tasks');
-            return allTasks ? JSON.parse(allTasks) : [];
-        } catch (error) {
-            console.error("Error parsing localStorage tasks:", error);
-            return []; 
-        }
-    }
-  const [data, setData] = useState(()=>getAllTask());
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
  
-  useEffect(() => {
-    const fetchData=()=>{
-        localStorage.setItem('tasks', JSON.stringify(data));
-    }
-    fetchData();
-  }, [data]);
 
+    const fetchData=async()=>{
+        const data=await getAllTasks();
+        setData(data);
+        return data;
+    }
+   
  
-  const addNewTask = (TaskData) => {
-    try{
+  const addNewTask = async(TaskData) => {
+    console.log(TaskData);
+    await addTask(TaskData)
     setData((prevData) => [...(prevData || []), TaskData]);
-    }catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
+    
+      if(res.success)
+      {
+      toast.success("Task added successfully");
+      setTimeout(() => {
+        navigate("/HomePage");
+      }, 1000);
+    }
+    else{
+      toast.error("Failed to add task");
+    }
   };
 
-  const updateTask = (updatedTask) => {
+  const update = async(updatedTask) => {
+    const data = await updateTask(updatedTask._id, updatedTask);
     setData(prevData=>prevData.map(task => task.TaskName === updatedTask.TaskName ? updatedTask : task));
+
+    if(res.success)
+    {
+    toast.success("Task updated successfully!");
+    setTimeout(() => {
+      navigate("/HomePage");
+    }, 1000);
+  }
+  else{
+    toast.error("Failed to update task");
+  }
 };
 
-const deleteTask = (taskName) => {
-    setData(prevData=>prevData.filter(task => task.TaskName !== taskName));
+const deleted = (task) => {
+    deleteTask(task._id);
+    setData(prevData=>prevData.filter(taskk => taskk._id !== task._id));
 };
 
 
   return (
-    <TaskDataContext.Provider value={{ tasks:data, addNewTask, updateTask,deleteTask,loading, error }}>
+    <TaskDataContext.Provider value={{ fetchData, addNewTask, update,deleted }}>
       {children}
     </TaskDataContext.Provider>
   );

@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import { Form, Input, Button, Select,DatePicker  } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import {addTask} from '../hooks/taskHook';
-import toast from 'react-hot-toast';
+import { TaskDataContext } from './TaskDataProvider';
 import dayjs from 'dayjs';
 const { Option } = Select;
 
 const AddCard = () => {
-  const navigate = useNavigate();
+const {addNewTask}=useContext(TaskDataContext)
 
   const onFinish = async(values) => {
     const newTaskData = {
@@ -17,15 +15,7 @@ const AddCard = () => {
       TaskPriority: values.TaskPriority,
       DueDate:values.DueDate ? dayjs(values.DueDate).format('YYYY-MM-DD') : null, 
     };
-    const data=await addTask(newTaskData);
-    if(data.length==0)
-    {
-      toast.error("Failed to add Task");
-    }
-    
-    setTimeout(() => {
-      navigate("/HomePage");
-    }, 1000);
+    const data=await addNewTask(newTaskData);
   };
 
   return (

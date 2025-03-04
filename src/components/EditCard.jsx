@@ -1,13 +1,12 @@
 import React, { useContext, useState,useEffect } from 'react';
 import { Form, Input, Button, Select,DatePicker } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import {updateTask} from '../hooks/taskHook';
+import { TaskDataContext } from './TaskDataProvider';
 import dayjs from 'dayjs';
 const { Option } = Select;
 
 const EditCard = ({task}) => {
-  const navigate = useNavigate();
+  const {update}=useContext(TaskDataContext);
   const [form]=Form.useForm();
 
   useEffect(() => {
@@ -31,14 +30,7 @@ const EditCard = ({task}) => {
       TaskPriority: values.TaskPriority,
       DueDate:values.DueDate ? dayjs(values.DueDate).format('YYYY-MM-DD') : null, 
     };
-    const data = await updateTask(newTaskData._id,newTaskData);
-    if (data.length == 0) {
-      toast.error("Failed to add task");
-    }
-    toast.success("Task updated successfully!");
-    setTimeout(() => {
-      navigate("/HomePage");
-    }, 1000);
+    const data = await update(newTaskData);
   };
 
   return (

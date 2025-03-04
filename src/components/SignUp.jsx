@@ -1,23 +1,17 @@
-import React from "react";
+import React,{ useContext }  from "react";
 import { Form, Input, Button, Select } from "antd";
-import { signUpUser } from "../hooks/userHook";
+import { UserDataContext } from "./UserDataProvider";
 const { Option } = Select;
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 const SignUp = () => {
-  const Navigate = useNavigate();
-  const onFinish = async (data) => {
-    const res = await signUpUser(data);
-    if (res.length < 0) {
-      toast.error("Error signing up");
-      return;
-    }
-    toast.success("Signup successful");
-    setTimeout(() => {
-      Navigate("/HomePage");
-    }, 1000);
+  const {signUpFunc}=useContext(UserDataContext)
+  
+    const onFinish=async(data) => {
+      await signUpFunc(data);  
   };
+  const Navigate = useNavigate();
+
 
   return (
     <>
@@ -76,7 +70,7 @@ const SignUp = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit"className="w-full">
                 Sign Up
               </Button>
             </Form.Item>

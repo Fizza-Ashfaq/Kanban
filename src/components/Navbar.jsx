@@ -1,9 +1,15 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Tabs } from "antd";
 import { Link, useLocation } from "react-router-dom";
+import {UserDataContext} from '../components/UserDataProvider'
 
 const Navbar = () => {
   const location = useLocation();
+  const {user,logoutFunc}=useContext(UserDataContext)
+
+  const onTabClick = async() => {
+      await logoutFunc();
+  };
 
   const items = [
     {
@@ -18,9 +24,17 @@ const Navbar = () => {
       key: "/LoggerPage",
       label: <Link to="/LoggerPage">History</Link>,
     },
-    {
+    !user && {
       key: "/LoginPage",
       label: <Link to="/LoginPage">SignUp/Login</Link>,
+    },
+    {
+      key: "/Logout",
+      label: (
+        <span className="cursor-pointer text-red-500" onClick={onTabClick}>
+          Logout
+        </span>
+      ),
     }
   ];
 

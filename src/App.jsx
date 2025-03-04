@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TaskDataProvider  from './components/TaskDataProvider';
+import UserDataProvider from './components/UserDataProvider';
 import HomePage from './pages/HomePage';
 import AddPage from './pages/AddPage';
 import EditPage from './pages/EditPage';
@@ -13,6 +14,8 @@ function App() {
 
   return (
     <>
+    <UserDataProvider>
+        <TaskDataProvider>
         <Routes>
           <Route path='/' element={<LoginPage />} />
           <Route path='/LoggerPage' element={<LoggerPage />} />
@@ -23,6 +26,9 @@ function App() {
           <Route path='/SignUpPage' element={<SignUpPage />} />
         </Routes>
         <Toaster position="top-center" reverseOrder={false}/>   
+        </TaskDataProvider>
+    </UserDataProvider>
+
     </>
   )
 }

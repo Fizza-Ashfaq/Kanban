@@ -1,23 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Input, Button } from "antd";
-import { loginUser } from "../hooks/userHook";
 import { useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
+import { UserDataContext } from "./UserDataProvider";
 
 const LoginCard = () => {
   const navigate = useNavigate();
+  const {loginFunc}=useContext(UserDataContext)
 
   const onFinish=async(data) => {
-    const res=await loginUser(data);
-    if(res.length<0)
-    {
-        toast.error("Error signing up");
-        return;
-    }
-    toast.success("Login successful");
-    setTimeout(() => {
-        navigate("/HomePage");
-      }, 1000);
+    await loginFunc(data);  
 };
 
   

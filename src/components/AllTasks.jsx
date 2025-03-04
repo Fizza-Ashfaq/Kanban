@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import TaskCard from "./TaskCard";
-import { updateTask, deleteTask, getAllTasks } from "../hooks/taskHook";
+import { TaskDataContext } from './TaskDataProvider';
 
 function AllTasks() {
+  const { fetchData, update,deleted} = useContext(TaskDataContext);  
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
   const [draggedTask, setDraggedTask] = useState(null);
 
   useEffect(() => {
-    const onrender=async () => {
-      const tasks = await getAllTasks();
-      setTasks(tasks);
-    }
+    const onrender = async () => {
+      try {
+        const tasksData = await fetchData();
+        setTasks(tasksData || []); 
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+        setTasks([]); 
+      }
+    };
     onrender();
   }, []);
 
@@ -28,9 +34,10 @@ function AllTasks() {
     navigate("/EditPage", { state: { task } });
   };
 
-  const onDelete = (task) => {
-    deleteTask(task._id);
-    setTasks((prevTasks) => prevTasks.filter((t) => t._id !== task._id));
+  const onDelete = async(task) => {
+    console.log(task);
+    await deleted(task);
+    setTasks(prevTasks => prevTasks.filter(t => t._id !== task._id));
   };
 
   const handleDragStart = (task) => {
@@ -63,7 +70,7 @@ function AllTasks() {
     allTasks.splice(draggedIndex, 1);
     allTasks.splice(dropIndex, 0, draggedTask);
 
-    await updateTask(updatedTask._id,updatedTask);
+    await update(updatedTask);
     setTasks((prevTasks)=>
       prevTasks.map((task)=>task._id===updatedTask._id ? updatedTask:task));
     setDraggedTask(null);
