@@ -1,21 +1,30 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:3000/users';
+const API_URL = "http://localhost:3000/users";
 
 export const loginUser = async (data) => {
-    const response =await axios.post(`${API_URL}/login`,data, { 
-        withCredentials: true });
-        console.log(response.data);
+  try {
+    const response = await axios.post(`${API_URL}/login`, data, {
+      withCredentials: true,
+    });
+    console.log(response.data);
     return response;
-}
+  } catch (error) {
+    return error.response.data.message;
+  }
+  // debugger
+};
 
 export const signUpUser = async (data) => {
-    const response =await axios.post(`${API_URL}/signUp`,data, { 
-        withCredentials: true });
-    return response;
-}
+  const response = await axios.post(`${API_URL}/signUp`, data, {
+    withCredentials: true,
+  });
+  return response;
+};
 
-export const logout=async()=>{
-    const response = await axios.get(`${API_URL}/logout`,{ withCredentials: true });
-    return response;
-}
+export const logout = async () => {
+  const response = await axios.get(`${API_URL}/logout`, {
+    withCredentials: true,
+  });
+  return response;
+};

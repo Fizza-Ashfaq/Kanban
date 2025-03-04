@@ -5,13 +5,12 @@ import { UserDataContext } from "./UserDataProvider";
 
 const LoginCard = () => {
   const navigate = useNavigate();
-  const {loginFunc}=useContext(UserDataContext)
+  const { loginFunc } = useContext(UserDataContext);
 
-  const onFinish=async(data) => {
-    await loginFunc(data);  
-};
+  const onFinish = async (data) => {
+    await loginFunc(data);
+  };
 
-  
   return (
     <>
       <div className="flex w-full justify-center">
