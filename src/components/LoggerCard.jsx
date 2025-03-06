@@ -40,7 +40,7 @@ const LoggerCard = () => {
         },
         {
             title: 'Timestamp',
-            dataIndex: 'doneAt',
+            dataIndex: 'createdAt',
             key: 'doneAt',
             render: (date) => new Date(date).toLocaleString(),
         },

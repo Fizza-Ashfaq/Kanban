@@ -2,7 +2,7 @@ import React from 'react'
 import EditCard from '../components/EditCard'
 import Navbar from '../components/Navbar'
 import {useLocation} from "react-router-dom"
-function EditPage() {
+function Edit() {
   const location = useLocation()
   const task=location.state.task;
   return (
@@ -15,4 +15,4 @@ function EditPage() {
   )
 }
 
-export default EditPage
+export default Edit

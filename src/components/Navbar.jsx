@@ -13,21 +13,21 @@ const Navbar = () => {
 
   const items = [
     {
-      key: "/HomePage",
-      label: <Link to="/HomePage">Home</Link>,
+      key: "/Home",
+      label: <Link to="/Home">Home</Link>,
     },
     {
-      key: "/AddPage",
-      label: <Link to="/AddPage">Add Task</Link>,
+      key: "/Add",
+      label: <Link to="/Add">Add Task</Link>,
     },
     {
-      key: "/LoggerPage",
-      label: <Link to="/LoggerPage">History</Link>,
+      key: "/Logger",
+      label: <Link to="/Logger">History</Link>,
     },
-    !user && {
-      key: "/LoginPage",
-      label: <Link to="/LoginPage">SignUp/Login</Link>,
-    },
+    // !user && {
+    //   key: "/LoginPage",
+    //   label: <Link to="/LoginPage">SignUp/Login</Link>,
+    // },
     {
       key: "/Logout",
       label: (

@@ -31,7 +31,7 @@ function AllTasks() {
   );
 
   const onEdit = (task) => {
-    navigate("/EditPage", { state: { task } });
+    navigate("/Edit", { state: { task } });
   };
 
   const onDelete = async(task) => {

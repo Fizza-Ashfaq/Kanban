@@ -4,21 +4,21 @@ const API_URL = "http://localhost:3000/tasks";
 
 export const addTask = async (task) => {
     const response = await axios.post(`${API_URL}/add`, task,{ withCredentials: true })
-    return response.data;
+    return response;
 }
 
 export const updateTask = async (id,updatedTask) => {
     const response = await axios.put(`${API_URL}/update/${id}`,updatedTask,{ withCredentials: true })
-    return response.data;
+    return response;
 }
 
 export const deleteTask = async (id) => {
-    try {
+    // try {
     const response = await axios.delete(`${API_URL}/delete/${id}`,{ withCredentials: true })
-    return response.data;}
-    catch (error) {
-        console.log("Failed to delete task");
-    }
+    return response;
+    // catch (error) {
+    //     console.log("Failed to delete task");
+    // }
 }
 
 export const getAllTasks = async () => {

@@ -19,14 +19,14 @@ const TaskDataProvider = ({ children }) => {
  
   const addNewTask = async(TaskData) => {
     console.log(TaskData);
-    await addTask(TaskData)
+    const res=await addTask(TaskData)
     setData((prevData) => [...(prevData || []), TaskData]);
     
-      if(res.success)
+      if(res.status == 201)
       {
       toast.success("Task added successfully");
       setTimeout(() => {
-        navigate("/HomePage");
+        navigate("/Home");
       }, 1000);
     }
     else{
@@ -35,14 +35,14 @@ const TaskDataProvider = ({ children }) => {
   };
 
   const update = async(updatedTask) => {
-    const data = await updateTask(updatedTask._id, updatedTask);
+    const res= await updateTask(updatedTask._id, updatedTask);
     setData(prevData=>prevData.map(task => task.TaskName === updatedTask.TaskName ? updatedTask : task));
 
-    if(res.success)
+    if(res.status == 200)
     {
     toast.success("Task updated successfully!");
     setTimeout(() => {
-      navigate("/HomePage");
+      navigate("/Home");
     }, 1000);
   }
   else{
@@ -51,8 +51,15 @@ const TaskDataProvider = ({ children }) => {
 };
 
 const deleted = (task) => {
-    deleteTask(task._id);
+    const res= deleteTask(task._id);
     setData(prevData=>prevData.filter(taskk => taskk._id !== task._id));
+    if(res.status == 200)
+      {
+      toast.success("Task Deleted successfully!");
+    }
+    else{
+      toast.error("Failed to Delete task");
+    }
 };
 
 

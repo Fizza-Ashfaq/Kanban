@@ -2,7 +2,7 @@ import React from "react";
 import LoginCard from "../components/LoginCard";
 import { Toaster } from "react-hot-toast";
 
-const LoginPage = () => {
+const Login = () => {
   return (
     <div>
       <Toaster />
@@ -14,4 +14,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

@@ -1,7 +1,7 @@
 import React from 'react';
 import LoggerCard from '../components/LoggerCard';
 import Navbar from '../components/Navbar';
-const LoggerPage = () => {
+const Logger = () => {
   return (
     <div >
         <Navbar />
@@ -10,4 +10,4 @@ const LoggerPage = () => {
   );
 };
 
-export default LoggerPage;
+export default Logger;

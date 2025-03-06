@@ -4,7 +4,7 @@ import AllTasks from "../components/AllTasks";
 import Navbar from "../components/Navbar";
 import { Button } from "antd";
 
-const HomePage = () => {
+const Home = () => {
   const navigate = useNavigate();
 
   return (
@@ -32,4 +32,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;

@@ -6,7 +6,7 @@ export const UserDataContext = React.createContext();
 
 function UserDataProvider({ children }) {
   const navigate = useNavigate();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   const loginFunc = async (data) => {
     try {
@@ -16,14 +16,12 @@ function UserDataProvider({ children }) {
         setUser(res);
         toast.success("Logged in successfully");
         setTimeout(() => {
-          navigate("/HomePage");
+          navigate("/Home");
         }, 1000);
       } else {
-       
         toast.error(res);
       }
     } catch (error) {
-        
       toast.error("error");
     }
   };
@@ -34,7 +32,7 @@ function UserDataProvider({ children }) {
       setUser(res);
       toast.success("User Signed Up successfully");
       setTimeout(() => {
-        navigate("/HomePage");
+        navigate("/Home");
       }, 1000);
     } else {
       toast.error("Invalid credentials");
@@ -47,10 +45,12 @@ function UserDataProvider({ children }) {
       setUser(null);
       toast.success("Logged out successfully");
       setTimeout(() => {
-        navigate("/LoginPage");
+        navigate("/Login");
       }, 1000);
     } else {
+      setTimeout(() => {
       toast.error("Unable to logout");
+      },1000);
     }
   };
 

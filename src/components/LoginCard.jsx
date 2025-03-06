@@ -59,7 +59,7 @@ const LoginCard = () => {
                 Don't have an account?{" "}
                 <span
                   className="text-blue-500 cursor-pointer hover:underline"
-                  onClick={() => navigate("/SignUpPage")}
+                  onClick={() => navigate("/SignUp")}
                 >
                   Sign up here
                 </span>
