@@ -24,10 +24,7 @@ function App() {
 
 function AppContent() {
   const {user}=useContext(UserDataContext)
-  // useEffect(() =>{
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   setUser(user);
-  // },[]);
+  
   return(
     <>
    
