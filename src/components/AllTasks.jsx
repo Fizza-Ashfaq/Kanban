@@ -55,7 +55,7 @@ function AllTasks() {
     }
 
     console.log("Dropped task", draggedTask);
-
+    
     const dropTarget = event.target.closest(".dropZone");
     const TaskElements = Array.from(dropTarget.querySelectorAll(".taskCard"));
 

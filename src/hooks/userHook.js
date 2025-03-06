@@ -12,7 +12,6 @@ export const loginUser = async (data) => {
   } catch (error) {
     return error.response.data.message;
   }
-  // debugger
 };
 
 export const signUpUser = async (data) => {
@@ -23,8 +22,13 @@ export const signUpUser = async (data) => {
 };
 
 export const logout = async () => {
-  const response = await axios.get(`${API_URL}/logout`, {
-    withCredentials: true,
-  });
-  return response;
+  try {
+    const response = await axios.get(`${API_URL}/logout`, {
+      withCredentials: true,
+    });
+    return response;
+  } catch (error) {
+    debugger
+    return error;
+  }
 };
